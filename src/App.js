@@ -14,11 +14,6 @@ function App() {
         </Link>
       </div>
       <Search />
-
-      {/* <Routes>
-        <Route exact  path='/' element={<Home />} />
-        <Route path="*" element={<MissingNo />} />
-      </Routes> */}
     </div>
   );
 }

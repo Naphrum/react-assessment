@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, Navigate } from "react-router-dom";
 import "./searchResults.css";
 import PokemonDetails from "../PokemonDetails/PokemonDetails";
+import MissingNo from "../MissingNo/MissingNo";
+import Home from "../Home/Home";
 
 const SearchResults = ({ searchQuery, setSearchQuery, pokemonList }) => {
   const [searchResults, setSearchResults] = useState([]);
@@ -15,7 +17,7 @@ const SearchResults = ({ searchQuery, setSearchQuery, pokemonList }) => {
         console.log(pokemonId[pokemonId.length - 1])
         return (
           <Link
-            to={`/${pokemonId[pokemonId.length - 2]}`}
+            to={`/pokemon/${pokemonId[pokemonId.length - 2]}`}
             key={pokemon.name}
             className="search-result"
             onClick={handleClick}
@@ -48,7 +50,10 @@ const SearchResults = ({ searchQuery, setSearchQuery, pokemonList }) => {
     <div className="search-results-wrapper">
       <div className="search-results" to="/">{renderSearchResults()}</div>
       <Routes>
-        <Route path="/:id" element={<PokemonDetails />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/notfound' element={<MissingNo />} />
+        <Route strict path="/pokemon/:id" element={<PokemonDetails />} />
+        <Route path='*' element={<Navigate to='/notfound' replace />} />
       </Routes>
     </div>
   );
